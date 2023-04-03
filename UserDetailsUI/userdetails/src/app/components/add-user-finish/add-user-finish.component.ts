@@ -120,7 +120,7 @@ export class AddUserFinishComponent implements OnInit {
         this.successMessage = true;
         sessionStorage.removeItem('userInfo');
         setTimeout(() => {
-          this.router.navigate(['/register']);
+          this.router.navigate(['/']);
         }, 2000);
       },
       error: (e) =>{
@@ -130,7 +130,7 @@ export class AddUserFinishComponent implements OnInit {
   }
 
   goToStep1(){
-    this.router.navigate(['/register'])
+    this.router.navigate(['/'])
   }
 
 }

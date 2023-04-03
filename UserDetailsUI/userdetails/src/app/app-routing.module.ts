@@ -5,8 +5,7 @@ import { AddUserComponent } from './components/add-user/add-user.component';
 import { AddUserFinishComponent } from './components/add-user-finish/add-user-finish.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/register', pathMatch: 'full' },
-  { path: 'register', component: AddUserComponent },
+  { path: '', component: AddUserComponent },
   { path: 'register-step2', component: AddUserFinishComponent }
 ];
 
