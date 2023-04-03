@@ -38,14 +38,14 @@ namespace RegisterUser.BusinessLayer.Services
             var isValidCountry = await _country.IsValidCountry(createUserRequest.CountryId);
             if (!isValidCountry)
             {
-                throw new NotFoundException("Country");
+                throw new NotFoundException(nameof(Country));
             }
 
             var isValidProvinceForCountry = await _province.IsValidProvinceForCountry(createUserRequest.CountryId, createUserRequest.ProvinceId);
 
             if (!isValidProvinceForCountry)
             {
-                throw new NotFoundException("Province");
+                throw new NotFoundException(nameof(Province));
             }
 
             var user = new UserDetail()

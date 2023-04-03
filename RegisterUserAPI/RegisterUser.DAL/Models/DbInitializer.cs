@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,19 +27,22 @@ namespace RegisterUser.DAL.Models
                         {
                             new Country { Name = "United States" },
                             new Country { Name = "Canada" },
-                            new Country { Name = "Mexico" },
-                            new Country { Name = "United Kingdom" }
+                            new Country { Name = "Russia" },
+                            new Country { Name = "Italy" }
                         };
-
 
                     // Seed Provinces
                     var provinces = new List<Province>()
                         {
                             new Province { Name = "California", CountryId = 1 },
                             new Province { Name = "New York", CountryId = 1 },
-                            new Province { Name = "Ontario", CountryId = 2 },
-                            new Province { Name = "Quebec", CountryId = 2 },
-                            new Province { Name = "Jalisco", CountryId = 3 }
+                            new Province { Name = "Alberta", CountryId = 2 },
+                            new Province { Name = "Manitoba", CountryId = 2 },
+                            new Province { Name = "Moscow City", CountryId = 3 },
+                            new Province { Name = "Krasnodar", CountryId = 3 },
+                            new Province { Name = "Sicily", CountryId = 4 },
+                            new Province { Name = "Sardinia", CountryId = 4 },
+                            new Province { Name = "Lazio", CountryId = 4 },
                         };
 
                     // Seed UserDetail
@@ -71,11 +73,6 @@ namespace RegisterUser.DAL.Models
                         context.UserDetails.AddRange(users);
                         context.SaveChanges();
                     }
-
-
-                    
-
-
                 }
             }
         }

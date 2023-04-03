@@ -14,21 +14,22 @@ namespace RegisterUser.BusinessLayer.Services
         private readonly IUserDetail _userDetail;
         private readonly IMemoryCache _memoryCache;
 
-        public const string _CountryListCacheKey = "CountryCacheKey";
-        public const string _ProvinceByCountryCacheKey = "ProvinceByCountryCacheKey";
-        public const string _UsersCacheKey = "UsersCacheKey";
+        private const string CountryListCacheKey = "CountryCacheKey";
+        private const string ProvinceByCountryCacheKey = "ProvinceByCountryCacheKey";
+        private const string UsersCacheKey = "UsersCacheKey";
+        private static readonly TimeSpan CacheDuration = TimeSpan.FromMinutes(10);
 
-        public CacheService(ICountry country, IProvince province, IMemoryCache memoryCache, IUserDetail userDetail)
+        public CacheService(ICountry country, IProvince province, IUserDetail userDetail, IMemoryCache memoryCache)
         {
             _country = country;
             _province = province;
-            _memoryCache = memoryCache;
             _userDetail = userDetail;
+            _memoryCache = memoryCache;
         }
 
         public async Task<List<Country>> GetCountriesAsync(bool shouldUpdateCache = false)
         {
-            if (!shouldUpdateCache && _memoryCache.TryGetValue($"{_CountryListCacheKey}", out List<Country> cachedCountryList))
+            if (!shouldUpdateCache && _memoryCache.TryGetValue(CountryListCacheKey, out List<Country> cachedCountryList))
             {
                 return cachedCountryList;
             }
@@ -36,7 +37,7 @@ namespace RegisterUser.BusinessLayer.Services
             var countryListResponse = await _country.GetCountriesAsync();
             if (countryListResponse?.Count > 0)
             {
-                _memoryCache.Set($"{_CountryListCacheKey}", countryListResponse, TimeSpan.FromMinutes(10));
+                _memoryCache.Set(CountryListCacheKey, countryListResponse, CacheDuration);
             }
 
             return countryListResponse;
@@ -44,15 +45,17 @@ namespace RegisterUser.BusinessLayer.Services
 
         public async Task<List<Province>> GetProvincesByCountryIdAsync(int countryId, bool shouldUpdateCache = false)
         {
-            if (!shouldUpdateCache && _memoryCache.TryGetValue($"{_ProvinceByCountryCacheKey}_{countryId}", out List<Province> cachedProvinceByCountryId))
+            var provinceCacheKey = $"{ProvinceByCountryCacheKey}_{countryId}";
+
+            if (!shouldUpdateCache && _memoryCache.TryGetValue(provinceCacheKey, out List<Province> cachedProvinceList))
             {
-                return cachedProvinceByCountryId;
+                return cachedProvinceList;
             }
 
             var provinceListResponse = await _province.GetProvincesByCountryIdAsync(countryId);
             if (provinceListResponse?.Count > 0)
             {
-                _memoryCache.Set($"{_ProvinceByCountryCacheKey}_{countryId}", provinceListResponse, TimeSpan.FromMinutes(10));
+                _memoryCache.Set(provinceCacheKey, provinceListResponse, CacheDuration);
             }
 
             return provinceListResponse;
@@ -60,7 +63,7 @@ namespace RegisterUser.BusinessLayer.Services
 
         public async Task<List<UserDetail>> GetUsersAsync(bool shouldUpdateCache = false)
         {
-            if (!shouldUpdateCache && _memoryCache.TryGetValue($"{_UsersCacheKey}", out List<UserDetail> cachedUsersList))
+            if (!shouldUpdateCache && _memoryCache.TryGetValue(UsersCacheKey, out List<UserDetail> cachedUsersList))
             {
                 return cachedUsersList;
             }
@@ -68,7 +71,7 @@ namespace RegisterUser.BusinessLayer.Services
             var usersListResponse = await _userDetail.GetUsersAsync();
             if (usersListResponse?.Count > 0)
             {
-                _memoryCache.Set($"{_UsersCacheKey}", usersListResponse, TimeSpan.FromMinutes(10));
+                _memoryCache.Set(UsersCacheKey, usersListResponse, CacheDuration);
             }
 
             return usersListResponse;

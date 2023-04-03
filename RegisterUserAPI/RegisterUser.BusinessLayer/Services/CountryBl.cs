@@ -9,22 +9,21 @@ namespace RegisterUser.BusinessLayer.Services
 {
     public class CountryBl : ICountry
     {
-        private readonly IRepository<Country> _country;
+        private readonly IRepository<Country> _countryRepository;
 
-        public CountryBl(IRepository<Country> country)
+        public CountryBl(IRepository<Country> countryRepository)
         {
-            _country = country;
+            _countryRepository = countryRepository;
         }
 
         public async Task<List<Country>> GetCountriesAsync()
         {
-            return await _country.GetAllAsync();
+            return await _countryRepository.GetAllAsync();
         }
 
         public async Task<bool> IsValidCountry(int countryId)
         {
-            return await _country.FindBy(e => e.CountryId == countryId).FirstOrDefaultAsync() != null;
+            return await _countryRepository.FindBy(e => e.CountryId == countryId).AnyAsync();
         }
-
     }
 }
