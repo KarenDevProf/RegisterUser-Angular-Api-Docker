@@ -39,7 +39,7 @@ after run , you can open ui project in browser
 
 3) Open UserDetailsUI  project in Visual Studio Code
  
-4) In file userdetails/src/config.ts
+4) In file userdetails/src/app/config.ts
    change apiUrl , set https://localhost:5001 (url backend address RegisterUser.API  project)
    
  The database is created in your local MSSQL
