@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  registeruserdb:
+   container_name: registeruserdb
+   environment:
+     SA_PASSWORD: "SwN12345678"
+     ACCEPT_EULA: "Y"
+   restart: always
+   ports:
+   - "1433:1433"
+
+  registeruser.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - "ConnectionStrings:RegisterUserConnectionString=Server=registeruserdb;Database=RegisterUser;User Id=sa;Password=SwN12345678"
+      - ASPNETCORE_URLS=http://+:80
+    depends_on:
+    - registeruserdb
+    ports:
+      - "8010:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  userdetailsui:
+    ports:
+      - "8011:80"

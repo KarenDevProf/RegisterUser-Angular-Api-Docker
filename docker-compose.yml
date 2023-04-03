@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  registeruserdb:
+   image: mcr.microsoft.com/mssql/server:2019-latest
+
+  registeruser.api:
+    image: ${DOCKER_REGISTRY-}registeruserapi
+    build:
+      context: .
+      dockerfile: RegisterUserAPI/RegisterUser.API/Dockerfile
+
+  userdetailsui:
+    image: ${DOCKER_REGISTRY-}userdetailsui
+    build:
+      context: .
+      dockerfile: UserDetailsUI/userdetails/Dockerfile

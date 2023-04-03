@@ -1,0 +1,81 @@
+<div class="register-form">
+    <form [formGroup]="form" (ngSubmit)="goToStep2()" name="form">
+    <div class="form-group">
+        <label for="email" class="control-label">Login<span class="text-danger"> *</span></label>
+        <div>                
+            <input
+            [ngClass]="{ 'is-invalid':(f['email'].dirty || submitted) && f['email'].invalid }" required
+            formControlName="email"
+            id="email"                
+            type="email"
+            placeholder="Email"
+            class="form-control">
+            <div *ngIf="(f['email'].dirty || submitted) && f['email'].errors" class="invalid-feedback">
+              <div *ngIf="f['email'].errors['required']">Login is required</div>
+              <div *ngIf="f['email'].errors['email']">Login must be a valid email.</div>
+              <div *ngIf="f['email'].errors['maxLength']">Login should be maximum 50 character.</div>
+            </div>
+        </div>
+
+
+      </div>
+      <div class="form-group">
+        <label for="password" class="control-label">Password<span class="text-danger"> *</span></label>
+        
+        <input type="password" formControlName="password" class="form-control" name="password" placeholder="Choose a password" 
+          [ngClass]="{ 'is-valid': (f['password'].dirty || submitted) && passwordValid, 'is-invalid': (f['password'].dirty || submitted) && !passwordValid }" />
+        <div class="invalid-feedback">
+          <span class="text-danger" *ngIf="(f['password'].dirty || submitted) && !requiredValid">Password is required</span>
+
+          <div id="validation-rules" class="mt-3" *ngIf="requiredValid">
+            <div [ngClass]="{ 'text-success': minLengthValid, 'text-danger': !minLengthValid }">
+              <i [attr.class]="minLengthValid ? 'bi-check-square-fill' : 'bi-x-square'"></i>
+              Must be at least 8 characters long
+            </div>
+
+            <div [ngClass]="{ 'text-success': requiresDigitValid, 'text-danger': !requiresDigitValid }">
+              <i [attr.class]="requiresDigitValid ? 'bi-check-square-fill' : 'bi-x-square'"></i>
+              Must contain at least 1 digit
+            </div>
+
+            <div [ngClass]="{ 'text-success': requiresUppercaseValid, 'text-danger': !requiresUppercaseValid }">
+              <i [attr.class]="requiresUppercaseValid ? 'bi-check-square-fill' : 'bi-x-square'"></i>
+              Must contain at least 1 uppercase character
+            </div>
+
+            <div [ngClass]="{ 'text-success': requiresLowercaseValid, 'text-danger': !requiresLowercaseValid }">
+              <i [attr.class]="requiresLowercaseValid ? 'bi-check-square-fill' : 'bi-x-square'"></i>
+              Must contain at least 1 lowercase character
+            </div>
+
+            <div [ngClass]="{ 'text-success': requiresSpecialCharsValid, 'text-danger': !requiresSpecialCharsValid }">
+              <i [attr.class]="requiresSpecialCharsValid ? 'bi-check-square-fill' : 'bi-x-square'"></i>
+              Must contain at least 1 special character
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    <div class="form-group">
+    <label for="confirmPassword" class="control-label">Confirm Password<span class="text-danger"> *</span></label>
+    <input type="password" formControlName="confirmPassword" class="form-control" name="confirmPassword" placeholder="Confirm your password" 
+        [ngClass]="{ 'is-valid': (submitted || f['confirmPassword'].dirty) && !f['confirmPassword'].errors, 'is-invalid': (submitted || f['confirmPassword'].dirty) && f['confirmPassword'].errors }">
+    <div class="invalid-feedback" *ngIf="(submitted || f['confirmPassword'].dirty) && f['confirmPassword'].errors">
+        <div *ngIf="f['confirmPassword'].errors['required']">Confirm your password</div>
+        <div *ngIf="f['confirmPassword'].errors['minLength']">Password must be at least 8 characters long</div>
+        <div *ngIf="f['confirmPassword'].errors['matching']">Passwords do not match</div>
+    </div>
+    </div>
+
+      <div class="form-group">
+        <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" [ngClass]="{ 'is-invalid': submitted && f['acceptTerms'].errors }" />
+        <label class="labelMargin" for="acceptTerms">Agree to work for food</label>
+        <div *ngIf="submitted && f['acceptTerms'].errors" class="invalid-feedback">Accept terms is required</div>
+      </div>
+  
+      <div class="form-group">
+        <button type="submit" style="float: right;" class="btn btn-primary">Go To Step 2</button>
+       
+      </div>
+    </form>
+  </div>
