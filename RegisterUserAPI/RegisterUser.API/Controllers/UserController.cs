@@ -13,17 +13,19 @@ namespace RegisterUser.API.Controllers
     public class UserController : RegisterBaseController
     {
         private readonly IUserDetail _userDetail;
+        private readonly ICacheService _cacheService;
 
-        public UserController(IRegisterUserServices services) : base(services)
+        public UserController(IRegisterUserServices services, ICacheService cacheService) : base(services)
         {
             _userDetail = services.GetService<IUserDetail>();
+            _cacheService = cacheService;
         }
 
         [HttpGet]
         public async Task<ResponseObjectModel<List<UserResponseModel>>> GetUsers()
         {
             ResponseObjectModel<List<UserResponseModel>> responseObject = new ResponseObjectModel<List<UserResponseModel>>();
-            var allUsers = await _userDetail.GetUsersAsync();
+            var allUsers = await _cacheService.GetUsersAsync();
             responseObject.Data = Mapper.Map<List<UserResponseModel>>(allUsers);
             return responseObject;
         }

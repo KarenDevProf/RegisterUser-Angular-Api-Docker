@@ -18,7 +18,6 @@ namespace RegisterUser.BusinessLayer.Services
 
         public async Task<List<Country>> GetCountriesAsync()
         {
-            // здесь можно было бы использовать Redis или MemoryCache, если нужно было бы решать проблему нагрузки
             return await _country.GetAllAsync();
         }
 

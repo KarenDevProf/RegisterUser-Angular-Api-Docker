@@ -9,13 +9,11 @@ namespace RegisterUser.API.Controllers
 {
     public class LocationDataController : RegisterBaseController
     {
-        private readonly ICountry _country;
-        private readonly IProvince _province;
+        private readonly ICacheService _cacheService;
 
-        public LocationDataController(IRegisterUserServices services) : base(services)
+        public LocationDataController(IRegisterUserServices services, ICacheService cacheService) : base(services)
         {
-            _country = services.GetService<ICountry>();
-            _province = services.GetService<IProvince>();
+            _cacheService = cacheService;
         }
 
         [HttpGet]
@@ -23,7 +21,7 @@ namespace RegisterUser.API.Controllers
         public async Task<ResponseObjectModel<List<LocationDataModel>>> GetCountries()
         {
             ResponseObjectModel<List<LocationDataModel>> responseObject = new ResponseObjectModel<List<LocationDataModel>>();
-            var allCountries = await _country.GetCountriesAsync();
+            var allCountries = await _cacheService.GetCountriesAsync();
             responseObject.Data = Mapper.Map<List<LocationDataModel>>(allCountries);
             return responseObject;
         }
@@ -33,7 +31,7 @@ namespace RegisterUser.API.Controllers
         public async Task<ResponseObjectModel<List<LocationDataModel>>> GetProvincesByCountry(int countryId)
         {
             ResponseObjectModel<List<LocationDataModel>> responseObject = new ResponseObjectModel<List<LocationDataModel>>();
-            var allProvincesByCountry = await _province.GetProvincesByCountryIdAsync(countryId);
+            var allProvincesByCountry = await _cacheService.GetProvincesByCountryIdAsync(countryId);
             responseObject.Data = Mapper.Map<List<LocationDataModel>>(allProvincesByCountry);
             return responseObject;
         }

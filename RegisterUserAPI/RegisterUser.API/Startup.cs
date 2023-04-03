@@ -49,6 +49,8 @@ namespace RegisterUser.API
 
             services.AddAutoMapper(typeof(Startup));
 
+            services.AddMemoryCache();
+
             services.AddDbContext<RegisterUserContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("RegisterUserConnectionString")));
 
@@ -57,6 +59,7 @@ namespace RegisterUser.API
 
         private void DependenceInjection(IServiceCollection services)
         {
+            services.AddScoped<ICacheService, CacheService>();
             services.AddScoped<RegisterUserContext>();
             services.AddScoped<IRegisterUserServices, RegisterUserServices>();
             services.AddScoped<DbContext, RegisterUserContext>();
