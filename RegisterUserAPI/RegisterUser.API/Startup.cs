@@ -49,8 +49,6 @@ namespace RegisterUser.API
 
             services.AddAutoMapper(typeof(Startup));
 
-            var connectionString = Configuration.GetConnectionString("RegisterUserConnectionString");
-
             services.AddDbContext<RegisterUserContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("RegisterUserConnectionString")));
 
