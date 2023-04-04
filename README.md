@@ -3,6 +3,7 @@
 Docker is used in the project.
 
 Run the project in Docker.
+Download Docker Desktop application  https://docs.docker.com/desktop/install/windows-install/
 
 Download Repo and run RegisterUser-API.sln file ..  UI and BackEnd in this solution
 
@@ -13,13 +14,10 @@ Download Repo and run RegisterUser-API.sln file ..  UI and BackEnd in this solut
  
 # Method #2 for run application
  
-1) Download Docker Desktop application  https://docs.docker.com/desktop/install/windows-install/
-
-2) Open the Developer Powershell tab at the bottom of Visual Studio.. Enter the command
+1) Open the Developer Powershell tab at the bottom of Visual Studio.. Enter the command
  
- for debug
+ for build
 "docker-compose build"
-
 
 for run in Docker Desktop application 
 "docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up -d"
