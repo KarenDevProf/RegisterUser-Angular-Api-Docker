@@ -6,12 +6,12 @@ Run the project in Docker.
 
 Download Repo and run RegisterUser-API.sln file ..  UI and BackEnd in this solution
 
-# Method 1 for run application
+# Method #1 for run application
 
 1) Set startup project docker-compose , and run it 
 2) After opening the browser, in the address bar type  http://localhost:8011/  - UI starts at this address
  
-# Method 2 for run application
+# Method #2 for run application
  
 1) Download Docker Desktop application  https://docs.docker.com/desktop/install/windows-install/
 
