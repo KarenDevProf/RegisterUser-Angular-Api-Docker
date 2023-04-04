@@ -4,13 +4,18 @@ Docker is used in the project.
 
 Run the project in Docker.
 
-1) Download Repo and run RegisterUser-API.sln file ..  UI and BackEnd in this solution
+Download Repo and run RegisterUser-API.sln file ..  UI and BackEnd in this solution
 
-2) Set startup project docker-compose
+# Method 1
 
-3) Download Docker Desktop application  https://docs.docker.com/desktop/install/windows-install/
+1) Set startup project docker-compose , and run it 
+2) After opening the browser, in the address bar type  http://localhost:8011/  - UI starts at this address
+ 
+# Method 2
+ 
+1) Download Docker Desktop application  https://docs.docker.com/desktop/install/windows-install/
 
-4) Open the Developer Powershell tab at the bottom of Visual Studio.. Enter the command
+2) Open the Developer Powershell tab at the bottom of Visual Studio.. Enter the command
  
  for debug
 "docker-compose build"
@@ -31,7 +36,7 @@ after run , you can open ui project in browser
 
 ---------------------------------------------------------------
 
-#You can also run the project without using Docker
+# You can also run the project without using Docker
 
 1) Set startup project RegisterUser.API project
 
