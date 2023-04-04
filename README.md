@@ -12,6 +12,8 @@ Download Repo and run RegisterUser-API.sln file ..  UI and BackEnd in this solut
 1) Set startup project docker-compose , and run it 
 2) After opening the browser, in the address bar type  http://localhost:8011/  - UI starts at this address
  
+ Swagger starts at  http://localhost:8010/swagger/index.html
+ 
 # Method #2 for run application
  
 1) Open the Developer Powershell tab at the bottom of Visual Studio.. Enter the command
@@ -45,4 +47,6 @@ after run , you can open ui project in browser
 4) In file userdetails/src/app/config.ts
    change apiUrl , set https://localhost:5001 (url backend address RegisterUser.API  project)
    
+  Swagger starts at  https://localhost:5001/swagger/index.html
+    
  The database is created in your local MSSQL
